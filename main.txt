@@ -1,0 +1,29 @@
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+
+import 'denem8-firestore-crud/core/viewmodels/CRUDModel.dart';
+import 'denem8-firestore-crud/locator.dart';
+import 'denem8-firestore-crud/ui/router.dart';
+
+void main() {
+  setupLocator();
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => xlocator<XCrudModel>()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        title: 'Product App',
+        theme: ThemeData(),
+        onGenerateRoute: XRouter.generateRoute,
+      ),
+    );
+  }
+}
